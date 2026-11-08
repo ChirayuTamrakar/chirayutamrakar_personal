@@ -4,10 +4,10 @@ import { WebkorpsLogo, MedicapsLogo } from './CompanyLogos';
 import { SkillsInteractiveChart } from './SkillsInteractiveChart';
 
 interface PolymathViewProps {
-  onNavigateToProjects: () => void;
+  onNavigateToProjects?: () => void;
 }
 
-export const PolymathView: React.FC<PolymathViewProps> = ({ onNavigateToProjects }) => {
+export const PolymathView: React.FC<PolymathViewProps> = () => {
   return (
     <div className="w-full pb-20 animate-fade-in font-serif">
       {/* Centered Circular Profile Photo */}

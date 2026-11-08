@@ -1,7 +1,7 @@
 import React from 'react';
 import { BIO_DATA } from '../data/content';
 
-export type NavTab = 'polymath' | 'projects' | 'thoughts' | 'books' | 'art';
+export type NavTab = 'me' | 'thoughts' | 'books' | 'art' | 'polymath' | 'projects';
 
 interface HeaderProps {
   currentTab: NavTab;
@@ -15,8 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenEmail
 }) => {
   const tabs: { key: NavTab; label: string }[] = [
-    { key: 'polymath', label: 'Polymath' },
-    { key: 'projects', label: 'Projects' },
+    { key: 'me', label: 'Me' },
     { key: 'thoughts', label: 'Thoughts' },
     { key: 'books', label: 'Books' },
     { key: 'art', label: 'Art' }
@@ -63,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
         {/* Site Title / Brand */}
         <button
-          onClick={() => onSelectTab('polymath')}
+          onClick={() => onSelectTab('me')}
           className="text-left text-2xl md:text-[26px] font-normal tracking-tight text-[#111111] hover:opacity-80 transition-opacity cursor-pointer font-serif"
         >
           {BIO_DATA.name}
@@ -72,7 +71,8 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Section Tabs */}
         <nav className="flex items-center gap-6 md:gap-7 text-[16px] md:text-[17px] font-serif">
           {tabs.map((tab) => {
-            const isActive = currentTab === tab.key;
+            const isActive =
+              currentTab === tab.key || (tab.key === 'me' && currentTab === 'polymath');
             return (
               <button
                 key={tab.key}

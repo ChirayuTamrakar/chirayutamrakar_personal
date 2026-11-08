@@ -7,7 +7,7 @@ export const ArtView: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
-  const [likesCount, setLikesCount] = useState<number>(74);
+  const [likesCount, setLikesCount] = useState<number>(86);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
 
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -15,8 +15,8 @@ export const ArtView: React.FC = () => {
 
   const currentTrack = ART_DATA.musicTracks[currentTrackIndex];
 
-  // Synthesize realistic warm acoustic piano sound using Web Audio API
-  const playPianoNote = (freq: number, duration: number = 2.0, gainVal: number = 0.2) => {
+  // Synthesize realistic warm acoustic guitar pluck using Web Audio API
+  const playGuitarPluck = (freq: number, duration: number = 2.4, gainVal: number = 0.22) => {
     try {
       if (!audioContextRef.current) {
         audioContextRef.current = new (window.AudioContext ||
@@ -29,40 +29,57 @@ export const ArtView: React.FC = () => {
 
       if (isMuted) return;
 
-      const osc = ctx.createOscillator();
+      const now = ctx.currentTime;
+
+      // Dual oscillators for rich guitar string body + fret harmonic overtones
+      const osc1 = ctx.createOscillator(); // fundamental
+      const osc2 = ctx.createOscillator(); // 1st harmonic overtone
+      const filter = ctx.createBiquadFilter();
       const gain = ctx.createGain();
 
-      // Warm piano overtone timbre
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(freq, now);
 
-      // Acoustic piano envelope (sharp attack, exponential decay)
-      gain.gain.setValueAtTime(0.001, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(gainVal, ctx.currentTime + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+      osc2.type = 'sawtooth';
+      osc2.frequency.setValueAtTime(freq * 2, now);
 
-      osc.connect(gain);
+      // Low-pass filter to simulate string damping (highs decay faster)
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(freq * 6, now);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.5, 200), now + duration * 0.8);
+
+      // Pluck attack & exponential string decay
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(gainVal, now + 0.008);
+      gain.gain.exponentialRampToValueAtTime(gainVal * 0.45, now + 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
       gain.connect(ctx.destination);
 
-      osc.start();
-      osc.stop(ctx.currentTime + duration);
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + duration);
+      osc2.stop(now + duration);
     } catch {
-      // Audio fallback
+      // Audio fallback for restricted browser states
     }
   };
 
-  // Play an ambient musical motif when playing
+  // Play realistic fingerstyle guitar arpeggios when playing
   useEffect(() => {
     if (isPlaying) {
-      // Play a chord immediately
-      const chords = [
-        [261.63, 329.63, 392.0], // C major
-        [220.0, 261.63, 329.63], // A minor
-        [174.61, 220.0, 261.63], // F major
-        [196.0, 246.94, 293.66]  // G major
+      // Fingerstyle guitar chord voicings (DADGAD & open acoustic tunings)
+      const guitarChords = [
+        [146.83, 220.0, 293.66, 369.99, 440.0], // DADGAD / D major
+        [98.0, 146.83, 196.0, 246.94, 329.63],   // G add9
+        [123.47, 185.0, 220.0, 293.66, 369.99],  // Bm7
+        [110.0, 164.81, 220.0, 293.66, 440.0]    // Asus4
       ];
 
-      let step = 0;
+      let chordStep = 0;
       timerRef.current = window.setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
@@ -72,12 +89,15 @@ export const ArtView: React.FC = () => {
           return prev + 1.2;
         });
 
-        const chord = chords[step % chords.length];
-        chord.forEach((freq, i) => {
-          setTimeout(() => playPianoNote(freq, 2.5, 0.15), i * 140);
+        const currentChord = guitarChords[chordStep % guitarChords.length];
+        // Fingerpicking finger roll across strings
+        currentChord.forEach((noteFreq, stringIdx) => {
+          window.setTimeout(() => {
+            playGuitarPluck(noteFreq, 2.6, 0.18 - stringIdx * 0.015);
+          }, stringIdx * 80);
         });
-        step++;
-      }, 1500);
+        chordStep++;
+      }, 1600);
     } else {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -126,14 +146,14 @@ export const ArtView: React.FC = () => {
         </a>
         , and{' '}
         <a href="#music" className="underline underline-offset-4 hover:text-black">
-          my music
+          my guitar music
         </a>
         .
       </p>
 
-      {/* Featured Image Card */}
+      {/* Featured Summit / Landscape Image Card */}
       <div className="mb-12">
-        <div className="rounded-2xl overflow-hidden shadow-xs border border-black/5 bg-[#EAE6DE] max-w-[440px]">
+        <div className="rounded-2xl overflow-hidden shadow-xs border border-black/5 bg-[#EAE6DE] max-w-[480px]">
           <img
             src={ART_DATA.landscapeImageUrl}
             alt="Chirayu on mountain summit overlooking observatories"
@@ -156,13 +176,13 @@ export const ArtView: React.FC = () => {
         </div>
       </section>
 
-      {/* Section: "My music" with Interactive Player */}
+      {/* Section: "My guitar & music" with Interactive Player and Studio Image */}
       <section id="music" className="border-t border-[#E5E1D8] pt-12">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Music className="w-5 h-5 text-[#444]" />
             <h2 className="text-2xl md:text-[26px] font-normal text-[#1A1A1A]">
-              My music
+              My guitar &amp; music
             </h2>
           </div>
 
@@ -178,15 +198,31 @@ export const ArtView: React.FC = () => {
         </div>
 
         <p className="text-[17px] leading-[1.65] text-[#444] mb-8">
-          Piano has been my primary creative anchor since childhood. These are four recordings and melodic sketches that reflect different emotional textures.
+          Guitar has been my primary creative anchor since childhood. Whether playing acoustic fingerstyle melodies or experimenting with warm electric tones and vintage tube amp reverb, playing guitar resets my perspective. These are recordings and instrumental sketches that reflect different textures.
         </p>
+
+        {/* Studio Guitar Setup Image Card */}
+        {ART_DATA.guitarImageUrl && (
+          <div className="mb-8 rounded-2xl overflow-hidden shadow-xs border border-black/5 bg-[#EAE6DE] max-w-[620px]">
+            <img
+              src={ART_DATA.guitarImageUrl}
+              alt="Chirayu's acoustic guitar and vintage tube amplifier setup"
+              className="w-full h-auto object-cover max-h-[380px]"
+              referrerPolicy="no-referrer"
+            />
+            <div className="px-4 py-2.5 bg-[#FAF8F3] border-t border-[#EAE6DE] text-xs text-[#666] font-sans flex items-center justify-between">
+              <span>Acoustic guitar &amp; vintage tube amplifier</span>
+              <span className="text-[#888]">Studio setup</span>
+            </div>
+          </div>
+        )}
 
         {/* Minimalist Audio Player Console */}
         <div className="p-6 rounded-2xl border border-[#DEDBD2] bg-[#FCFBF8] shadow-xs mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div>
               <span className="text-xs font-sans uppercase tracking-wider text-[#888] block mb-0.5">
-                Now Playing
+                Now Playing · Guitar Session
               </span>
               <h3 className="text-xl font-medium text-[#1A1A1A]">
                 {currentTrack.title}

@@ -110,7 +110,7 @@ export const BIO_DATA = {
   name: 'Chirayu Tamrakar',
   role: 'DevOps & Cloud Infrastructure Engineer',
   location: 'Indore, India',
-  avatarUrl: '/chirayu_avatar.jpg',
+  avatarUrl: '/chirayu_avatar.jpeg',
   greeting: "Hi I'm Chirayu, welcome to my website!",
   paragraphs: [
     "I'm currently working at the intersection of DevOps, cloud infrastructure, and software engineering, focusing on building reliable deployment systems, automating engineering workflows, and improving how applications are delivered and operated. I believe infrastructure and automation are more than supporting functions — they are engineering force multipliers that enable teams to build, ship, and scale software with greater speed, confidence, and reliability.",
@@ -357,7 +357,7 @@ export const PROJECTS: ProjectItem[] = [
     tweetData: {
       author: 'Chirayu Tamrakar',
       handle: 'ChirayX008',
-      avatarUrl: '/chirayu_avatar.jpg',
+      avatarUrl: '/chirayu_avatar.jpeg',
       date: 'Jul 23, 2026',
       text: "I'm excited to introduce Polymath Society.\n\nYour resume and LinkedIn do not know who you really are. But your AI tools do.\n\nPolymath helps you analyze your Claude Code/Codex/Cursor, ChatGPT, Claude, and Notion logs. It does all this locally without anything touching our servers.",
       likes: '238',
@@ -380,7 +380,7 @@ export const PROJECTS: ProjectItem[] = [
     tweetData: {
       author: 'Chirayu Tamrakar',
       handle: 'ChirayX008',
-      avatarUrl: '/chirayu_avatar.jpg',
+      avatarUrl: '/chirayu_avatar.jpeg',
       date: 'May 8, 2026',
       text: "Take-homes are cooked. No one knows how much the human did and how much AI did.\n\nI built the fix - same take-home, candidate screen-shares, we see their granular process and give a report.\n\nSign up if you're hiring and want much better signal : polymathsociety.us",
       likes: '13',
@@ -464,7 +464,7 @@ export const PROJECTS: ProjectItem[] = [
     tweetData: {
       author: 'Chirayu Tamrakar',
       handle: 'ChirayX008',
-      avatarUrl: '/chirayu_avatar.jpg',
+      avatarUrl: '/chirayu_avatar.jpeg',
       date: 'Apr 16, 2025',
       text: "Not knowing how to code has been a bottleneck for way too long.\n\nToday I'm launching Flomi - The code editor for people who don't code.\n\nIt lets you build things way more powerful than Bolt or Lovable.",
       likes: '1.3K',
@@ -679,42 +679,43 @@ export const BOOKS_RECOMMENDED: BookRecommendation[] = [
 
 export const ART_DATA = {
   title: 'On art and life',
-  intro: "I appreciate art deeply and it's added much colour to my life. This page has my thoughts on art, life, and my music.",
-  landscapeImageUrl: '/chirayu_landscape.jpg',
+  intro: "I appreciate art deeply and it's added much colour to my life. This page has my thoughts on art, life, and my guitar music.",
+  landscapeImageUrl: '/chirayu_landscape.jpeg',
+  guitarImageUrl: '/guitar_art.jpeg',
   subheading: "What's life about for me?",
   essayParagraphs: [
     "I want my life to be 20% about personal fulfillment and 80% about helping the world become a safer and flourishing place.",
-    "A lot of that comes down to building things that reduce existential risk and elevate human agency. But personal fulfillment isn't negligible: the beauty of piano improvisations, warm afternoons, philosophy, and aesthetic craft are what make a flourishing future worth saving.",
-    "When I sit on a high mountain summit overlooking the observatories or play a phrase of music, it resets my sense of perspective. High-stakes engineering requires a tranquil mind. Art is not an indulgence or a diversion—it's the emotional baseline that makes sustained intensity sustainable."
+    "A lot of that comes down to building things that reduce existential risk and elevate human agency. But personal fulfillment isn't negligible: the beauty of acoustic fingerstyle guitar, warm overdriven chords, philosophy, and aesthetic craft are what make a flourishing future worth saving.",
+    "When I sit on a high mountain summit overlooking the observatories or pick up my guitar to play an acoustic improvisation, it resets my sense of perspective. High-stakes engineering requires a tranquil mind. Art is not an indulgence or a diversion—it's the emotional baseline that makes sustained intensity sustainable."
   ],
   musicTracks: [
     {
       id: 'track-1',
-      title: 'Nocturne in C Minor, Op. 48 No. 1',
-      composer: 'Frédéric Chopin',
-      duration: '06:14',
-      description: 'One of the most emotionally profound piano works ever composed. The doppiodi movimento section captures quiet turbulence turning into grand resolve.'
+      title: 'Acoustic Fingerstyle in DADGAD',
+      composer: 'Chirayu Tamrakar',
+      duration: '04:18',
+      description: 'Warm acoustic fingerpicking exploring open DADGAD harmonics, natural wooden body resonance, and cascading melodic runs.'
     },
     {
       id: 'track-2',
-      title: 'Clair de Lune',
-      composer: 'Claude Debussy',
-      duration: '05:02',
-      description: 'Impressionist harmonics and lingering room acoustics. A meditation on light, shadow, and quiet stillness.'
+      title: 'Capricho Árabe (Classical Guitar Motif)',
+      composer: 'Francisco Tárrega / arr. Chirayu Tamrakar',
+      duration: '04:45',
+      description: 'Spanish classical guitar masterpiece with expressive rubato, rapid arpeggiated phrasing, and introspective Andalusian themes.'
     },
     {
       id: 'track-3',
-      title: 'Gymnopédie No. 1',
-      composer: 'Erik Satie',
-      duration: '03:28',
-      description: 'Radical minimalism: repetitive, melancholic chords that strip away unnecessary ornamentation.'
+      title: 'Midnight Stratocaster & Tube Reverb',
+      composer: 'Chirayu Tamrakar',
+      duration: '03:52',
+      description: 'Electric guitar through a vintage tube amplifier with gentle analog spring reverb, harmonic overtones, and ambient room sustain.'
     },
     {
       id: 'track-4',
-      title: 'Polymath Resonance (Original Motif)',
+      title: 'Autumn Chord Progressions (Acoustic Sketch)',
       composer: 'Chirayu Tamrakar',
-      duration: '04:12',
-      description: 'Gentle piano sketch composed during late-night ideation sessions in San Francisco.'
+      duration: '03:36',
+      description: 'Mellow neo-soul and jazz-inflected open chord voicings recorded during quiet evening practice sessions.'
     }
   ]
 };

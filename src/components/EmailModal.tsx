@@ -75,7 +75,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
         </h3>
 
         <p className="text-[15px] leading-relaxed text-[#555] mb-6">
-          Always excited to connect with fellow researchers, founders, rationalists, and curious builders in AI safety and governance.
+          Always excited to connect with fellow engineers, platform builders, cloud architects, and curious technologists in DevOps and software delivery.
         </p>
 
         {/* Quick Email Copy Box */}

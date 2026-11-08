@@ -9,16 +9,21 @@ import { EmailModal } from './components/EmailModal';
 import { BIO_DATA } from './data/content';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<NavTab>('polymath');
+  const [currentTab, setCurrentTab] = useState<NavTab>('me');
   const [selectedEssaySlug, setSelectedEssaySlug] = useState<string | null>(null);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
-  // Sync with browser hash if present (e.g. #projects, #thoughts, #books, #art)
+  // Sync with browser hash if present (e.g. #me, #thoughts, #books, #art)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['polymath', 'projects', 'thoughts', 'books', 'art'].includes(hash)) {
+      if (hash === 'polymath' || hash === 'me') {
+        setCurrentTab('me');
+      } else if (['thoughts', 'books', 'art'].includes(hash)) {
         setCurrentTab(hash as NavTab);
+      } else {
+        // Fallback to 'me' if hash is 'projects' or unknown
+        setCurrentTab('me');
       }
     };
 
@@ -28,10 +33,15 @@ export default function App() {
   }, []);
 
   const handleSelectTab = (tab: NavTab) => {
-    setCurrentTab(tab);
-    window.location.hash = tab;
+    // Block switching to projects
+    if (tab === 'projects') {
+      return;
+    }
+    const targetTab = tab === 'polymath' ? 'me' : tab;
+    setCurrentTab(targetTab);
+    window.location.hash = targetTab;
     // When switching tabs, reset essay view if moving away from thoughts
-    if (tab !== 'thoughts') {
+    if (targetTab !== 'thoughts') {
       setSelectedEssaySlug(null);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,13 +60,9 @@ export default function App() {
 
           {/* Active Tab View */}
           <main className="w-full">
-            {currentTab === 'polymath' && (
-              <PolymathView
-                onNavigateToProjects={() => handleSelectTab('projects')}
-              />
+            {(currentTab === 'me' || currentTab === 'polymath') && (
+              <PolymathView />
             )}
-
-            {currentTab === 'projects' && <ProjectsView />}
 
             {currentTab === 'thoughts' && (
               <ThoughtsView
@@ -72,11 +78,8 @@ export default function App() {
         </div>
 
         {/* Minimalist Editorial Footer */}
-        <footer className="w-full py-10 border-t border-[#E8E4DA] text-xs font-sans text-[#777] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <footer className="w-full py-10 border-t border-[#E8E4DA] text-xs font-sans text-[#777] flex items-center justify-between">
           <span>&copy; {new Date().getFullYear()} {BIO_DATA.name}</span>
-          <span className="italic font-serif text-[13px] text-[#666]">
-            San Francisco, CA · Built with editorial care
-          </span>
         </footer>
       </div>
 

@@ -1,5 +1,31 @@
 import React from 'react';
 
+export const WebkorpsLogo: React.FC<{ className?: string }> = ({ className = 'w-9 h-9' }) => (
+  <div
+    className={`inline-flex items-center justify-center rounded-lg border border-[#DEDBD2] bg-[#121A24] text-white p-1.5 shadow-xs ${className}`}
+    title="Webkorps Pvt Ltd"
+  >
+    {/* Geometric tech monogram "W" */}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-sky-400">
+      <path d="M3 5l4 14 5-11 5 11 4-14" />
+      <circle cx="12" cy="8" r="1.5" fill="#38BDF8" />
+    </svg>
+  </div>
+);
+
+export const MedicapsLogo: React.FC<{ className?: string }> = ({ className = 'w-9 h-9' }) => (
+  <div
+    className={`inline-flex items-center justify-center rounded-lg border border-[#DEDBD2] bg-[#7F1D1D] text-white p-1.5 shadow-xs ${className}`}
+    title="Medicaps University"
+  >
+    {/* Academic graduation cap / academic shield emblem */}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-amber-200">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </svg>
+  </div>
+);
+
 export const MoxLogo: React.FC<{ className?: string }> = ({ className = 'w-9 h-9' }) => (
   <div className={`inline-flex items-center justify-center rounded-lg border border-[#DEDBD2] bg-[#FCFBF8] p-1.5 shadow-xs ${className}`} title="Mox">
     <svg viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">

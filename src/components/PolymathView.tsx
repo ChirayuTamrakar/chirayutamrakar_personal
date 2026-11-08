@@ -1,6 +1,7 @@
 import React from 'react';
 import { BIO_DATA, PUBLICATIONS, EXPERIENCES } from '../data/content';
-import { MoxLogo, SpcLogo, FoundersIncLogo } from './CompanyLogos';
+import { WebkorpsLogo, MedicapsLogo } from './CompanyLogos';
+import { SkillsInteractiveChart } from './SkillsInteractiveChart';
 
 interface PolymathViewProps {
   onNavigateToProjects: () => void;
@@ -23,38 +24,17 @@ export const PolymathView: React.FC<PolymathViewProps> = ({ onNavigateToProjects
 
       {/* Bio Copy */}
       <div className="space-y-6 text-[18px] md:text-[19px] leading-[1.7] text-[#1A1A1A] max-w-[720px] mx-auto">
-        <p className="font-normal">{BIO_DATA.greeting}</p>
+        <p className="font-normal text-xl">{BIO_DATA.greeting}</p>
 
-        <p>
-          I&apos;m currently building{' '}
-          <button
-            onClick={onNavigateToProjects}
-            className="underline underline-offset-4 text-[#1A1A1A] hover:text-black cursor-pointer inline"
-          >
-            talent evaluation and routing infrastructure
-          </button>{' '}
-          for AI safety. More great talent seems like the best way to make AI
-          safety progress compound faster within the timeframes we have.
-        </p>
-
-        <p>
-          Before this I was building in the talent space too. Colleges are an
-          expensive and inefficient signaling mechanism, education is in a
-          suboptimal Nash equilibrium. I spent years thinking about alternative
-          proof-of-work systems for high-agency talent.
-        </p>
-
-        <p>
-          I&apos;m also passionate about coordinating efforts in AI alignment,
-          technical governance, and finding people with the agency to do
-          high-leverage work.
-        </p>
+        {BIO_DATA.paragraphs.map((para, idx) => (
+          <p key={idx}>{para}</p>
+        ))}
       </div>
 
       {/* Publications Section */}
       <section className="mt-16 pt-8 max-w-[720px] mx-auto">
         <h2 className="text-2xl md:text-[26px] font-normal text-[#1A1A1A] mb-6">
-          Here are my AI research publications
+          Research Publications &amp; Patents
         </h2>
 
         <ul className="space-y-5 text-[17px] md:text-[18px] leading-[1.65] text-[#1A1A1A] list-disc list-outside pl-5">
@@ -88,52 +68,39 @@ export const PolymathView: React.FC<PolymathViewProps> = ({ onNavigateToProjects
             Education &amp; Experience
           </h2>
 
-          {EXPERIENCES.map((exp) => (
-            <div key={exp.id} className="space-y-4">
-              {/* Header row: Logos + Role + Subtitle */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <MoxLogo />
-                  <SpcLogo />
-                  <FoundersIncLogo />
+          <div className="space-y-10">
+            {EXPERIENCES.map((exp) => (
+              <div key={exp.id} className="space-y-3">
+                {/* Header row: Logo + Role + Subtitle */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3.5">
+                  <div className="flex items-center gap-2">
+                    {exp.id === 'exp-webkorps' ? <WebkorpsLogo /> : <MedicapsLogo />}
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-medium text-[#1A1A1A] leading-snug">
+                      {exp.role}
+                    </h3>
+                    <p className="text-[14.5px] text-[#666461] leading-tight mt-0.5">
+                      {exp.organization} | {exp.dates} | {exp.location}
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <h3 className="text-xl font-medium text-[#1A1A1A] leading-snug">
-                    {exp.role}
-                  </h3>
-                  <p className="text-[14px] md:text-[15px] text-[#666461] leading-tight mt-0.5">
-                    {exp.organization} | {exp.dates} | {exp.location}
-                  </p>
+                {/* Descriptions */}
+                <div className="space-y-2 text-[17px] md:text-[18px] leading-[1.7] text-[#1A1A1A] pt-1">
+                  {exp.description.map((desc, dIdx) => (
+                    <p key={dIdx}>{desc}</p>
+                  ))}
                 </div>
               </div>
-
-              {/* Descriptions */}
-              <div className="space-y-4 text-[17px] md:text-[18px] leading-[1.7] text-[#1A1A1A] pt-2">
-                <p>
-                  I&apos;ve been a founder on and off since January 2025:
-                  launched 7 different products, and learnt loads with every
-                  iteration. I&apos;ve been a member at South Park Commons and
-                  Founders Inc along the way.
-                </p>
-                <p>
-                  I&apos;m now building Polymath out of{' '}
-                  <a
-                    href="https://moxsf.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline underline-offset-4 hover:text-black"
-                  >
-                    Mox
-                  </a>
-                  , the community for rationalists and effective altruists in
-                  San Francisco.
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Technical Skills Section with Interactive Pie Chart on Right */}
+      <SkillsInteractiveChart />
     </div>
   );
 };

@@ -96,16 +96,28 @@ export interface AudioTrack {
   description: string;
 }
 
+export interface SkillCategory {
+  id: 'devops' | 'cloud' | 'development';
+  name: string;
+  tagline: string;
+  color: string;
+  secondaryColor: string;
+  percentage: number;
+  skills: string[];
+}
+
 export const BIO_DATA = {
   name: 'Chirayu Tamrakar',
-  role: 'Founder & AI Safety Researcher',
-  location: 'San Francisco',
+  role: 'DevOps & Cloud Infrastructure Engineer',
+  location: 'Indore, India',
   avatarUrl: '/chirayu_avatar.jpg',
   greeting: "Hi I'm Chirayu, welcome to my website!",
   paragraphs: [
-    "I'm currently building talent evaluation and routing infrastructure for AI safety. More great talent seems like the best way to make AI safety progress compound faster within the timeframes we have.",
-    "Before this I was building in the talent space too. Colleges are an expensive and inefficient signaling mechanism, education is in a suboptimal Nash equilibrium. I spent years thinking about alternative proof-of-work systems for high-agency talent.",
-    "I'm passionate about coordinating efforts in AI alignment, technical governance, and finding people with the agency to do high-leverage work."
+    "I'm currently working at the intersection of DevOps, cloud infrastructure, and software engineering, focusing on building reliable deployment systems, automating engineering workflows, and improving how applications are delivered and operated. I believe infrastructure and automation are more than supporting functions — they are engineering force multipliers that enable teams to build, ship, and scale software with greater speed, confidence, and reliability.",
+    "My technical background spans cloud engineering, containerization, orchestration, CI/CD, and infrastructure as code. I work with technologies including AWS, Docker, Kubernetes, Jenkins, GitLab CI/CD, Pulumi, Terraform, and Linux, with a particular interest in cloud-native architecture, deployment automation, infrastructure governance, and scalable platform engineering.",
+    "Before focusing on infrastructure and DevOps, I built a foundation in full-stack software development using the MERN ecosystem. I've worked on application architecture, RESTful APIs, authentication, database design, real-time communication, and responsive interfaces using React, Node.js, Express.js, and MongoDB. This full-stack perspective allows me to understand the application lifecycle beyond infrastructure alone.",
+    "I'm particularly interested in the convergence of software engineering, cloud computing, automation, and emerging technologies. I enjoy understanding complex systems, connecting ideas across engineering disciplines, and turning manual, fragmented processes into automated and repeatable solutions.",
+    "My long-term focus is on becoming a well-rounded infrastructure and platform engineer — someone who can design systems, build automation, solve complex production challenges, and contribute across the entire software delivery lifecycle."
   ],
   socials: {
     github: 'https://github.com/ChirayuTamrakar/',
@@ -134,19 +146,148 @@ export const PUBLICATIONS: Publication[] = [
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
-    id: 'exp-founder',
-    role: 'Founder',
-    organization: 'Mox, South Park Commons and Founders Inc',
-    dates: 'Jan 2025 - Present, at different times',
-    location: 'San Francisco',
+    id: 'exp-webkorps',
+    role: 'Associate Software Developer',
+    organization: 'Webkorps Pvt Ltd',
+    dates: 'April 27, 2026 - Present',
+    location: 'Indore, India',
     logos: [
-      { name: 'Mox', type: 'mox' },
-      { name: 'South Park Commons', type: 'spc' },
-      { name: 'Founders Inc', type: 'founders_inc' }
+      { name: 'Webkorps', type: 'founders_inc' }
     ],
     description: [
-      "I've been a founder on and off since January 2025: launched 7 different products, and learnt loads with every iteration. I've been a member at South Park Commons and Founders Inc along the way.",
-      "I'm now building Polymath out of Mox, the community for rationalists and effective altruists in San Francisco."
+      "Working at the intersection of DevOps, cloud infrastructure, and software engineering. Building reliable deployment systems, automated CI/CD pipelines, and infrastructure governance.",
+      "Hands-on with containerization (Docker, Kubernetes), infrastructure as code (Terraform, Pulumi), AWS cloud services, and full-stack MERN integrations to improve application delivery."
+    ]
+  },
+  {
+    id: 'exp-medicaps',
+    role: 'B.Tech in Computer Science and Engineering',
+    organization: 'Medicaps University',
+    dates: '2022 - 2026',
+    location: 'Indore, India',
+    logos: [
+      { name: 'Medicaps', type: 'spc' }
+    ],
+    description: [
+      "Rigorous undergraduate engineering program with coursework in Operating Systems, Cloud Computing, Computer Networks, Database Management Systems, and Distributed Systems.",
+      "Built foundation in system architecture, Linux environments, algorithms, full-stack software development, and automation."
+    ]
+  }
+];
+
+export const SKILLS_CATEGORIES: SkillCategory[] = [
+  {
+    id: 'devops',
+    name: 'DevOps & Automation',
+    tagline: 'CI/CD, Containers, Orchestration, IaC, GitOps & Observability',
+    color: '#1A1A1A',
+    secondaryColor: '#3F3F3E',
+    percentage: 50,
+    skills: [
+      'Docker',
+      'Docker Compose',
+      'Kubernetes',
+      'Helm',
+      'Minikube',
+      'Kind',
+      'Jenkins',
+      'GitLab CI/CD',
+      'GitHub Actions',
+      'Argo CD',
+      'GitOps',
+      'Flux CD',
+      'Terraform',
+      'Pulumi',
+      'Ansible',
+      'Linux',
+      'Ubuntu',
+      'Bash',
+      'Shell Scripting',
+      'Groovy',
+      'YAML',
+      'JSON',
+      'Prometheus',
+      'Grafana',
+      'ELK Stack',
+      'OpenTelemetry',
+      'HashiCorp Vault',
+      'Keeper External Secrets',
+      'SonarQube',
+      'Trivy',
+      'Checkov',
+      'Istio',
+      'Kustomize',
+      'Git',
+      'GitHub',
+      'GitLab',
+      'Maven',
+      'VS Code',
+      'Postman',
+      'Backstage',
+      'MLflow',
+      'Ray'
+    ]
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud Infrastructure (AWS)',
+    tagline: 'Compute, Networking, Security, Serverless & Managed Datastores',
+    color: '#C27803',
+    secondaryColor: '#D97706',
+    percentage: 26,
+    skills: [
+      'AWS',
+      'EC2',
+      'S3',
+      'IAM',
+      'VPC',
+      'EKS',
+      'ECR',
+      'AWS MSK',
+      'CloudWatch',
+      'CodePipeline',
+      'CodeBuild',
+      'CodeDeploy',
+      'CloudFormation',
+      'AWS CDK',
+      'Lambda',
+      'RDS',
+      'DynamoDB',
+      'API Gateway',
+      'Route 53',
+      'CloudFront',
+      'AWS Secrets Manager',
+      'Boto3'
+    ]
+  },
+  {
+    id: 'development',
+    name: 'Full-Stack Development',
+    tagline: 'MERN Stack, Core Languages, APIs, Protocols & Database Design',
+    color: '#3F5161',
+    secondaryColor: '#4A5D6E',
+    percentage: 24,
+    skills: [
+      'React.js',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'MySQL',
+      'Redux',
+      'HTML5',
+      'CSS3',
+      'Tailwind CSS',
+      'Material UI',
+      'REST APIs',
+      'MVC',
+      'JWT',
+      'WebSockets',
+      'Socket.io',
+      'TypeScript',
+      'JavaScript',
+      'Python',
+      'C++',
+      'SQL'
     ]
   }
 ];

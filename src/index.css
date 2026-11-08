@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Newsreader', 'Lora', Georgia, serif;
+    background-color: #FAF9F6;
+    color: #1A1A1A;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #FAF9F6;
+    color: #1A1A1A;
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+/* Custom editorial styling */
+.font-serif-editorial {
+  font-family: 'Newsreader', 'Lora', Georgia, serif;
+}
+
+/* Subtle link underline styles matching the original design */
+a, .link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(26, 26, 26, 0.4);
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+
+a:hover, .link-underline:hover {
+  text-decoration-color: rgba(26, 26, 26, 1);
+}
+
+.no-underline-link {
+  text-decoration: none;
+}

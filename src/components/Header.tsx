@@ -14,8 +14,9 @@ export const Header: React.FC<HeaderProps> = ({
   onSelectTab,
   onOpenEmail
 }) => {
-  const tabs: { key: NavTab; label: string }[] = [
+  const tabs: { key: NavTab; label: string; disabled?: boolean; hint?: string }[] = [
     { key: 'me', label: 'Me' },
+    { key: 'projects', label: 'Projects', disabled: true, hint: 'Projects coming soon' },
     { key: 'thoughts', label: 'Thoughts' },
     { key: 'books', label: 'Books' },
     { key: 'art', label: 'Art' }
@@ -71,6 +72,19 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Section Tabs */}
         <nav className="flex items-center gap-6 md:gap-7 text-[16px] md:text-[17px] font-serif">
           {tabs.map((tab) => {
+            if (tab.disabled) {
+              return (
+                <span
+                  key={tab.key}
+                  title={tab.hint}
+                  aria-disabled="true"
+                  className="opacity-40 text-[#444442] cursor-not-allowed select-none transition-opacity"
+                >
+                  {tab.label}
+                </span>
+              );
+            }
+
             const isActive =
               currentTab === tab.key || (tab.key === 'me' && currentTab === 'polymath');
             return (

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="ctGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#262626" />
+      <stop offset="100%" stop-color="#121212" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded card -->
+  <rect width="64" height="64" rx="14" fill="url(#ctGrad)" />
+  <rect width="62" height="62" x="1" y="1" rx="13" fill="none" stroke="#FAF9F6" stroke-opacity="0.15" stroke-width="1" />
+  
+  <!-- Serif Monogram "CT" with editorial optical balance -->
+  <text 
+    x="32" 
+    y="42" 
+    font-family="'Newsreader', 'Lora', 'Georgia', 'Times New Roman', serif" 
+    font-size="28" 
+    font-weight="600" 
+    fill="#FAF9F6" 
+    text-anchor="middle" 
+    letter-spacing="-1"
+  >CT</text>
+</svg>
